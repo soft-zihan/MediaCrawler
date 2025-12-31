@@ -94,6 +94,18 @@ class CDPBrowserManager:
         self._cleanup_registered = True
         utils.logger.info("[CDPBrowserManager] Cleanup handlers registered")
 
+    def _is_port_in_use(self, port: int) -> bool:
+        """
+        Check if a port is already in use by trying to connect to it
+        """
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.settimeout(1)
+                result = s.connect_ex(('localhost', port))
+                return result == 0  # 0 means connection successful, port is in use
+        except Exception:
+            return False
+
     async def launch_and_connect(
         self,
         playwright: Playwright,
@@ -105,22 +117,29 @@ class CDPBrowserManager:
         Launch browser and connect via CDP
         """
         try:
-            # 1. Detect browser path
-            browser_path = await self._get_browser_path()
+            # 1. Check if there's already a browser running on the default CDP port
+            default_port = config.CDP_DEBUG_PORT
+            if self._is_port_in_use(default_port):
+                utils.logger.info(f"[CDPBrowserManager] Found existing browser on port {default_port}, will connect to it")
+                self.debug_port = default_port
+                # Skip browser launch, go directly to connect
+            else:
+                # 2. Detect browser path
+                browser_path = await self._get_browser_path()
 
-            # 2. Get available port
-            self.debug_port = self.launcher.find_available_port(config.CDP_DEBUG_PORT)
+                # 3. Get available port
+                self.debug_port = self.launcher.find_available_port(default_port)
 
-            # 3. Launch browser
-            await self._launch_browser(browser_path, headless)
+                # 4. Launch browser
+                await self._launch_browser(browser_path, headless)
 
-            # 4. Register cleanup handlers (ensure cleanup on abnormal exit)
+            # 5. Register cleanup handlers (ensure cleanup on abnormal exit)
             self._register_cleanup_handlers()
 
-            # 5. Connect via CDP
+            # 6. Connect via CDP
             await self._connect_via_cdp(playwright)
 
-            # 6. Create browser context
+            # 7. Create browser context
             browser_context = await self._create_browser_context(
                 playwright_proxy, user_agent
             )
