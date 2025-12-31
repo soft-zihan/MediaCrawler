@@ -1,3 +1,34 @@
+# 🔥 MediaCrawler - Rastreador de Plataformas de Redes Sociales 🕷️
+
+---
+
+## 🌟 Descripción de la Rama Fork
+
+> **Este repositorio es un Fork de [NanmiCoder/MediaCrawler](https://github.com/NanmiCoder/MediaCrawler)**
+>
+> Mantenedor: [@soft-zihan](https://github.com/soft-zihan)
+
+### 📦 Nueva Función: Lite Crawler (Búsqueda Agregada Ligera)
+
+Este Fork añade el módulo `lite_crawler`, diseñado para **escenarios de búsqueda agregada con IA**:
+
+- 🎯 **Búsqueda Agregada**: Rastrea los 8 primeros contenidos por plataforma con enlaces originales
+- 📝 **Datos Simplificados**: Sin perfiles de creadores, enfocado en contenido y comentarios
+- 🌐 **REST API**: Interfaz unificada, soporta acceso multi-dispositivo
+- 🛡️ **Modo CDP**: Mejor capacidad anti-detección
+
+**Plataformas Soportadas**: Bilibili, Douyin, Xiaohongshu, Zhihu, Tieba (✅ Probado) | Weibo, Kuaishou (🚧 En Desarrollo)
+
+```bash
+# Inicio rápido
+python -m lite_crawler search "Python" -p xhs,bilibili -o simple
+python -m lite_crawler serve --port 8888
+```
+
+📖 **Documentación**: [lite_crawler/README.md](lite_crawler/README.md)
+
+---
+
 <div align="center" markdown="1">
    <sup>Special thanks to:</sup>
    <br>
@@ -11,8 +42,6 @@
 
 </div>
 <hr>
-
-# 🔥 MediaCrawler - Rastreador de Plataformas de Redes Sociales 🕷️
 
 <div align="center">
 

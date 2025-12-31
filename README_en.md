@@ -1,3 +1,34 @@
+# 🔥 MediaCrawler - Social Media Platform Crawler 🕷️
+
+---
+
+## 🌟 Fork Branch Description
+
+> **This repository is a Fork of [NanmiCoder/MediaCrawler](https://github.com/NanmiCoder/MediaCrawler)**
+>
+> Maintainer: [@soft-zihan](https://github.com/soft-zihan)
+
+### 📦 New Feature: Lite Crawler (Lightweight Aggregated Search)
+
+This Fork adds the `lite_crawler` module, designed for **AI aggregated search scenarios**:
+
+- 🎯 **Aggregated Search**: Crawl top 8 contents per platform with original links
+- 📝 **Simplified Data**: No creator profiles, focused on content and comments
+- 🌐 **REST API**: Unified interface, supports multi-device access
+- 🛡️ **CDP Mode**: Better anti-detection capability
+
+**Supported Platforms**: Bilibili, Douyin, Xiaohongshu, Zhihu, Tieba (✅ Tested) | Weibo, Kuaishou (🚧 In Development)
+
+```bash
+# Quick start
+python -m lite_crawler search "Python" -p xhs,bilibili -o simple
+python -m lite_crawler serve --port 8888
+```
+
+📖 **Documentation**: [lite_crawler/README.md](lite_crawler/README.md)
+
+---
+
 <div align="center" markdown="1">
    <sup>Special thanks to:</sup>
    <br>
@@ -11,7 +42,6 @@
 
 </div>
 <hr>
-# 🔥 MediaCrawler - Social Media Platform Crawler 🕷️
 
 <div align="center">
 
